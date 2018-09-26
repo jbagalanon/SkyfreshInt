@@ -188,7 +188,7 @@
             this.btnSave.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnSave.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnSave.ForeColor = System.Drawing.SystemColors.ButtonFace;
-            this.btnSave.Location = new System.Drawing.Point(245, 326);
+            this.btnSave.Location = new System.Drawing.Point(245, 337);
             this.btnSave.Margin = new System.Windows.Forms.Padding(4);
             this.btnSave.Name = "btnSave";
             this.btnSave.Size = new System.Drawing.Size(183, 44);
@@ -232,9 +232,9 @@
             this.label8.Location = new System.Drawing.Point(18, 249);
             this.label8.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(109, 23);
+            this.label8.Size = new System.Drawing.Size(116, 23);
             this.label8.TabIndex = 26;
-            this.label8.Text = "Paid Amount";
+            this.label8.Text = "Payment Type";
             // 
             // txtGrandTotal
             // 
@@ -622,7 +622,7 @@
             this.panel4.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.panel4.BackColor = System.Drawing.Color.ForestGreen;
-            this.panel4.Location = new System.Drawing.Point(0, 659);
+            this.panel4.Location = new System.Drawing.Point(0, 764);
             this.panel4.Margin = new System.Windows.Forms.Padding(4);
             this.panel4.Name = "panel4";
             this.panel4.Size = new System.Drawing.Size(1588, 48);
@@ -632,7 +632,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1588, 694);
+            this.ClientSize = new System.Drawing.Size(1588, 799);
             this.Controls.Add(this.panel4);
             this.Controls.Add(this.pnldataGridView);
             this.Controls.Add(this.panel3);

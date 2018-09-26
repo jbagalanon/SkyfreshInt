@@ -27,5 +27,12 @@ namespace SkyfreshInt.UserInterface
             frmUsers frmUser = new frmUsers();
             frmUser.Show();
         }
+
+        private void logoutToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            frmLogin log = new frmLogin();
+            log.Show();
+            this.Hide();
+        }
     }
 }

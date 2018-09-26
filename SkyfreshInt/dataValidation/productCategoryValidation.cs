@@ -9,19 +9,13 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-
-//Note: select and search method is identical
-//static method to connect database
-
 namespace SkyfreshInt.dataValidation
 {
-    class userFrmValidation
+    class productCategoryValidation
     {
+        static string myconnstring = ConfigurationManager.ConnectionStrings["connstring"].ConnectionString;
 
-            static string myconnstring = ConfigurationManager.ConnectionStrings["connstring"].ConnectionString;
-
-
-        #region Select Data in database
+        #region Select Data in tblProductCategory Table
         public DataTable Select()
         {
             SqlConnection conn = new SqlConnection(myconnstring);
@@ -30,7 +24,7 @@ namespace SkyfreshInt.dataValidation
 
             try
             {
-                string sql = "Select * from tblUsers"; //Select all the data in tblusers database
+                string sql = "Select * from tblProductCategory"; //Select all the data in tblusers database
                 SqlCommand cmd = new SqlCommand(sql, conn); // create sql command using sql query
                 SqlDataAdapter adapter = new SqlDataAdapter(cmd); //this will all get the data from database using cmd
                 conn.Open(); //this will open database connection
@@ -51,10 +45,10 @@ namespace SkyfreshInt.dataValidation
         }
 
         #endregion
-        
+
         #region Insert Data on database
 
-        public bool Insert (userGetSet user)
+        public bool Insert(productCategoryGetSet prodCategory)
         {
             bool isSuccess = false;
 
@@ -62,25 +56,19 @@ namespace SkyfreshInt.dataValidation
 
             try
             {
-                String sql = "INSERT INTO tblUsers (firstName, lastName,email,username,password,contact,gender,userType, addedDate,addedBy) VALUES (@firstName, @lastName,@email,@username,@password,@contact,@gender,@userType, @addedDate,@addedBy)";
+                String sql = "INSERT INTO tblProductCategory (title, description, addedDate,addedBy) VALUES  (@title, @description, @addedDate, @addedBy)";
                 SqlCommand cmd = new SqlCommand(sql, conn);
 
 
                 // add value to parameters
-                cmd.Parameters.AddWithValue("@firstName", user.firstName);
-                cmd.Parameters.AddWithValue("@lastName", user.lastName);
-                cmd.Parameters.AddWithValue("@email", user.email);
-                cmd.Parameters.AddWithValue("@username", user.username);
-                cmd.Parameters.AddWithValue("@password", user.password);
-                cmd.Parameters.AddWithValue("@contact", user.contact);
-                cmd.Parameters.AddWithValue("@gender", user.gender);
-                cmd.Parameters.AddWithValue("@userType", user.userType);
-                cmd.Parameters.AddWithValue("@addedDate", user.addedDate);
-                cmd.Parameters.AddWithValue("@addedBy", user.addedBy);
+                cmd.Parameters.AddWithValue("@title", prodCategory.title);
+                cmd.Parameters.AddWithValue("@description", prodCategory.description);
+                cmd.Parameters.AddWithValue("@addedDate", prodCategory.addedDate);
+                cmd.Parameters.AddWithValue("@addedBy", prodCategory.addedBy);
 
                 conn.Open();
 
-                int rows = cmd.ExecuteNonQuery();  
+                int rows = cmd.ExecuteNonQuery();
 
                 //if the query is executed success then the value to rows will be greater that 0 else 
                 // it will be less than 0
@@ -94,7 +82,7 @@ namespace SkyfreshInt.dataValidation
                 {
                     isSuccess = false;
                 }
-                
+
             }
             catch (Exception ex)
             {
@@ -103,7 +91,7 @@ namespace SkyfreshInt.dataValidation
             }
             finally
             {
-                conn.Close(); 
+                conn.Close();
 
             }
             return isSuccess;
@@ -112,8 +100,8 @@ namespace SkyfreshInt.dataValidation
 
         #endregion
 
-        #region Update Data in database
-        public bool update (userGetSet user)
+        #region Update Data in tblProductCategory Table
+        public bool update(productCategoryGetSet prodCategory)
         {
             bool isSuccess = false;
 
@@ -122,20 +110,14 @@ namespace SkyfreshInt.dataValidation
 
             try
             {
-                string sql = "Update tblusers set firstName=@firstName, lastName=@lastName,email=@email,username=@username,password=@password,contact=@contact,gender=@gender,userType=@userType, addedDate=@addedDate,addedBy=@addedBy where userId=@userId";
+                string sql = "Update tblProductCategory set title=@title, description=@description, addedDate=@addedDate,addedBy=@addedBy where categoryId=@categoryId";
                 SqlCommand cmd = new SqlCommand(sql, conn);
 
-                cmd.Parameters.AddWithValue("@firstName", user.firstName);
-                cmd.Parameters.AddWithValue("@lastName", user.lastName);
-                cmd.Parameters.AddWithValue("@email", user.email);
-                cmd.Parameters.AddWithValue("@username", user.username);
-                cmd.Parameters.AddWithValue("@password", user.password);
-                cmd.Parameters.AddWithValue("@contact", user.contact);
-                cmd.Parameters.AddWithValue("@gender", user.gender);
-                cmd.Parameters.AddWithValue("@userType", user.userType);
-                cmd.Parameters.AddWithValue("@addedDate", user.addedDate);
-                cmd.Parameters.AddWithValue("@addedBy", user.addedBy);
-                cmd.Parameters.AddWithValue("@userId", user.userId);
+                cmd.Parameters.AddWithValue("@title", prodCategory.title);
+                cmd.Parameters.AddWithValue("@description", prodCategory.description);
+                cmd.Parameters.AddWithValue("@addedDate", prodCategory.addedDate);
+                cmd.Parameters.AddWithValue("@addedBy", prodCategory.addedBy);
+                cmd.Parameters.AddWithValue("@userId", prodCategory.categoryId);
 
                 conn.Open();
 
@@ -160,7 +142,7 @@ namespace SkyfreshInt.dataValidation
             finally
             {
                 conn.Close();
-                
+
             }
             return isSuccess;
         }
@@ -168,9 +150,9 @@ namespace SkyfreshInt.dataValidation
 
         #endregion
 
-        #region delete data in database
+        #region delete data in tblProductCategory Table
 
-        public bool delete (userGetSet user)
+        public bool delete(productCategoryGetSet prodCategory)
         {
             bool isSuccess = false;
 
@@ -179,13 +161,12 @@ namespace SkyfreshInt.dataValidation
 
             try
             {
-                string sql = "Delete from tblUsers where userId=@userID";
+                string sql = "Delete from tblProductCategory where categoryId=@categoryId";
 
                 SqlCommand cmd = new SqlCommand(sql, conn);
 
-            
-                cmd.Parameters.AddWithValue("@userID", user.userId);
 
+                cmd.Parameters.AddWithValue("@categoryId", prodCategory.categoryId);
                 conn.Open();
 
                 int rows = cmd.ExecuteNonQuery();
@@ -210,12 +191,12 @@ namespace SkyfreshInt.dataValidation
                 conn.Close();
 
             }
-            return isSuccess; 
+            return isSuccess;
         }
 
         #endregion
 
-        #region Search User in tblusers
+        #region Search product categoy in tblProductCategory Table
 
         public DataTable search(string keywords)
         {
@@ -225,7 +206,7 @@ namespace SkyfreshInt.dataValidation
 
             try
             {
-                string sql = "Select * from tblUsers where userId Like '%"+keywords+ "%' or lastName like'%"+ keywords+ "%' or userName like '%" + keywords + "%'";
+                string sql = "Select * from tblProductCategory where categoryId Like '%" + keywords + "%' or title like'%" + keywords + "%' or description like '%" + keywords + "%'";
                 //Select specifica  data in tblusers to search 
                 SqlCommand cmd = new SqlCommand(sql, conn); // create sql command using sql query
                 SqlDataAdapter adapter = new SqlDataAdapter(cmd); //this will all get the data from database using cmd
@@ -248,42 +229,6 @@ namespace SkyfreshInt.dataValidation
 
         #endregion
 
-        #region Getting userid from username; to display in addedBy
-
-        public userGetSet getUsernameId (string username)
-        {
-            userGetSet userInfo = new userGetSet ();
-
-            SqlConnection conn = new SqlConnection(myconnstring);
-            DataTable dt = new DataTable();
-
-            try
-            {
-
-                string sql = "Select userId from tblUsers where username='"+ username +"'";
-
-                SqlDataAdapter adapter = new SqlDataAdapter(sql, conn);
-                conn.Open();
-
-                adapter.Fill(dt);
-
-                if (dt.Rows.Count >= 0)
-                {
-                  userInfo.userId = int.Parse(dt.Rows[0]["userId"].ToString());
-                }
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message);
-            }
-            finally
-            {
-                conn.Close();
-            }
-            return userInfo;
-        }
-
-        #endregion
-
+    
     }
 }

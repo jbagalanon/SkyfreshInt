@@ -47,11 +47,15 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="dataValidation\chequeValidation.cs" />
+    <Compile Include="dataValidation\customerValidation.cs" />
     <Compile Include="dataValidation\loginValidation.cs" />
+    <Compile Include="dataValidation\productCategoryValidation.cs" />
     <Compile Include="dataValidation\userFrmValidation.cs" />
     <Compile Include="GetterSetter\chequesGetSet.cs" />
     <Compile Include="GetterSetter\customerGetSet.cs" />
     <Compile Include="GetterSetter\dispencersGetSet.cs" />
+    <Compile Include="GetterSetter\productCategoryGetSet.cs" />
     <Compile Include="GetterSetter\productsGetSet.cs" />
     <Compile Include="GetterSetter\userGetSet.cs" />
     <Compile Include="GetterSetter\userLogin.cs" />
@@ -80,6 +84,12 @@
     </Compile>
     <Compile Include="UserInterface\frmOrdering.Designer.cs">
       <DependentUpon>frmOrdering.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UserInterface\frmProductCategory.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UserInterface\frmProductCategory.Designer.cs">
+      <DependentUpon>frmProductCategory.cs</DependentUpon>
     </Compile>
     <Compile Include="UserInterface\frmSalesTransactions.cs">
       <SubType>Form</SubType>
@@ -125,6 +135,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="UserInterface\frmOrdering.resx">
       <DependentUpon>frmOrdering.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UserInterface\frmProductCategory.resx">
+      <DependentUpon>frmProductCategory.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UserInterface\frmSalesTransactions.resx">
       <DependentUpon>frmSalesTransactions.cs</DependentUpon>

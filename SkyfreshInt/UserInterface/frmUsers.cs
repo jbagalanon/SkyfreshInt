@@ -48,9 +48,6 @@ namespace SkyfreshInt.UserInterface
         private void btnAdd_Click(object sender, EventArgs e)
         {
             //getting the username of logged user during login which will initialiazed the login form
-            
-            
-
             //get the data from user interface
 
             userData.firstName = txtFirstName.Text;
@@ -62,8 +59,11 @@ namespace SkyfreshInt.UserInterface
             userData.gender = cmbGender.Text;
             userData.userType = cmbUserType.Text;
             userData.addedDate = DateTime.Now;
-            //get the username of logged user
+
+            //get the username of logged user in login form
             string loggedUser = frmLogin.loggedUser;
+
+            //get the userid based on username
             userGetSet usr = userDetails.getUsernameId(loggedUser);
 
             userData.addedBy = usr.userId;

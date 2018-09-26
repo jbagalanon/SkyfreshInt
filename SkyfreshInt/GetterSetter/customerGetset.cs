@@ -12,15 +12,16 @@ namespace SkyfreshInt.GetterSetter
         public string firstName { get; set; }
         public string lastName { get; set; }
         public string companyName { get; set; }
-        public string companyType { get; set; }
+        public string customerType { get; set; }
         public string phone { get; set; }
-        public string trunk { get; set; }
+        public string ext { get; set; }
         public string mobile { get; set; }
-        public string unit { get; set; }
-        public string building { get; set; }
         public string street { get; set; }
-        public string barangay { get; set; }
+        public string region { get; set; }
         public string city { get; set; }
+        public string barangay { get; set; }
+        public string zipCode { get; set; }
+        public string customerStatus { get; set; }
         public DateTime addedDate { get; set; }
         public int addedBy { get; set; }
         public string status { get; set; }

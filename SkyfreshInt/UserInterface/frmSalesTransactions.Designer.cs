@@ -186,7 +186,7 @@
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(219, 28);
             this.label2.TabIndex = 41;
-            this.label2.Text = "View Sales Product  by";
+            this.label2.Text = "View Product Sales  by";
             // 
             // btnCompute
             // 

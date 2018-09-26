@@ -22,7 +22,9 @@ namespace SkyfreshInt
 
         private void createUserToolStripMenuItem_Click(object sender, EventArgs e)
         {
-
+            frmLogin log = new frmLogin();
+            log.Show();
+            this.Hide();
         }
 
         private void exitToolStripMenuItem_Click(object sender, EventArgs e)
@@ -44,6 +46,18 @@ namespace SkyfreshInt
         private void frmAdminDashboad_Load(object sender, EventArgs e)
         {
             lblLoggeUser.Text = frmLogin.loggedUser; 
+        }
+
+        private void productCategoryToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            frmProductCategory prodCat = new frmProductCategory();
+            prodCat.Show();
+        }
+
+        private void customersToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            frmCustomers custForm = new frmCustomers();
+            custForm.Show();
         }
     }
 }

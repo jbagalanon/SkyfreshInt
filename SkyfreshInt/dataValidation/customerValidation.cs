@@ -9,19 +9,14 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-
-//Note: select and search method is identical
-//static method to connect database
-
 namespace SkyfreshInt.dataValidation
 {
-    class userFrmValidation
+    class customerValidation
     {
+        static string myconnstring = ConfigurationManager.ConnectionStrings["connstring"].ConnectionString;
 
-            static string myconnstring = ConfigurationManager.ConnectionStrings["connstring"].ConnectionString;
 
-
-        #region Select Data in database
+        #region Select Data in customer records table
         public DataTable Select()
         {
             SqlConnection conn = new SqlConnection(myconnstring);
@@ -30,7 +25,7 @@ namespace SkyfreshInt.dataValidation
 
             try
             {
-                string sql = "Select * from tblUsers"; //Select all the data in tblusers database
+                string sql = "Select * from tblClients"; //Select all the data in tblusers database
                 SqlCommand cmd = new SqlCommand(sql, conn); // create sql command using sql query
                 SqlDataAdapter adapter = new SqlDataAdapter(cmd); //this will all get the data from database using cmd
                 conn.Open(); //this will open database connection
@@ -51,10 +46,10 @@ namespace SkyfreshInt.dataValidation
         }
 
         #endregion
-        
+
         #region Insert Data on database
 
-        public bool Insert (userGetSet user)
+        public bool Insert (customerGetSet customer)
         {
             bool isSuccess = false;
 
@@ -62,25 +57,33 @@ namespace SkyfreshInt.dataValidation
 
             try
             {
-                String sql = "INSERT INTO tblUsers (firstName, lastName,email,username,password,contact,gender,userType, addedDate,addedBy) VALUES (@firstName, @lastName,@email,@username,@password,@contact,@gender,@userType, @addedDate,@addedBy)";
+                String sql = "INSERT INTO tblClients  (firstName, lastName, companyName, customerType, phone, ext, mobile, street, region, city, barangay, zipCode, customerStatus, addedDate, addedBy) VALUES (@firstName, @lastName, @companyName, @customerType, @phone, @ext, @mobile, @street, @region, @city, @barangay, @zipCode, @customerStatus, @addedDate, @addedBy) ";
+
+
                 SqlCommand cmd = new SqlCommand(sql, conn);
 
 
                 // add value to parameters
-                cmd.Parameters.AddWithValue("@firstName", user.firstName);
-                cmd.Parameters.AddWithValue("@lastName", user.lastName);
-                cmd.Parameters.AddWithValue("@email", user.email);
-                cmd.Parameters.AddWithValue("@username", user.username);
-                cmd.Parameters.AddWithValue("@password", user.password);
-                cmd.Parameters.AddWithValue("@contact", user.contact);
-                cmd.Parameters.AddWithValue("@gender", user.gender);
-                cmd.Parameters.AddWithValue("@userType", user.userType);
-                cmd.Parameters.AddWithValue("@addedDate", user.addedDate);
-                cmd.Parameters.AddWithValue("@addedBy", user.addedBy);
-
+                cmd.Parameters.AddWithValue("@firstName", customer.firstName);
+                cmd.Parameters.AddWithValue("@lastName", customer.lastName);
+                cmd.Parameters.AddWithValue("@companyName", customer.companyName);
+                cmd.Parameters.AddWithValue("@customerType", customer.customerType);
+                cmd.Parameters.AddWithValue("@phone", customer.phone);
+                cmd.Parameters.AddWithValue("@ext", customer.ext);
+                cmd.Parameters.AddWithValue("@mobile", customer.mobile);
+                cmd.Parameters.AddWithValue("@street", customer.street);
+                cmd.Parameters.AddWithValue("@region", customer.region);
+                cmd.Parameters.AddWithValue("@city", customer.city);
+                cmd.Parameters.AddWithValue("@barangay", customer.barangay);
+                cmd.Parameters.AddWithValue("@zipCode", customer.zipCode);
+                cmd.Parameters.AddWithValue("@customerStatus", customer.customerStatus);
+                cmd.Parameters.AddWithValue("@addedDate", customer.addedDate);
+                cmd.Parameters.AddWithValue("@addedBy", customer.addedBy);
+              
+                
                 conn.Open();
 
-                int rows = cmd.ExecuteNonQuery();  
+                int rows = cmd.ExecuteNonQuery();
 
                 //if the query is executed success then the value to rows will be greater that 0 else 
                 // it will be less than 0
@@ -94,7 +97,7 @@ namespace SkyfreshInt.dataValidation
                 {
                     isSuccess = false;
                 }
-                
+
             }
             catch (Exception ex)
             {
@@ -103,7 +106,7 @@ namespace SkyfreshInt.dataValidation
             }
             finally
             {
-                conn.Close(); 
+                conn.Close();
 
             }
             return isSuccess;
@@ -113,7 +116,7 @@ namespace SkyfreshInt.dataValidation
         #endregion
 
         #region Update Data in database
-        public bool update (userGetSet user)
+        public bool update(customerGetSet customer)
         {
             bool isSuccess = false;
 
@@ -122,21 +125,29 @@ namespace SkyfreshInt.dataValidation
 
             try
             {
-                string sql = "Update tblusers set firstName=@firstName, lastName=@lastName,email=@email,username=@username,password=@password,contact=@contact,gender=@gender,userType=@userType, addedDate=@addedDate,addedBy=@addedBy where userId=@userId";
+                string sql = "Update tblClients set firstName=@firstName, lastName=@lastName, companyName=@companyName, customerType=@customerType, phone=@phone, ext=@ext, mobile=@mobile, street=@street, region=@region, city=@city, barangay=@barangay, zipCode=@zipCode, customerStatus=@customerStatus, addedDate=@addedDate, addedBy=@addedBy where customerId=@customerId";
                 SqlCommand cmd = new SqlCommand(sql, conn);
 
-                cmd.Parameters.AddWithValue("@firstName", user.firstName);
-                cmd.Parameters.AddWithValue("@lastName", user.lastName);
-                cmd.Parameters.AddWithValue("@email", user.email);
-                cmd.Parameters.AddWithValue("@username", user.username);
-                cmd.Parameters.AddWithValue("@password", user.password);
-                cmd.Parameters.AddWithValue("@contact", user.contact);
-                cmd.Parameters.AddWithValue("@gender", user.gender);
-                cmd.Parameters.AddWithValue("@userType", user.userType);
-                cmd.Parameters.AddWithValue("@addedDate", user.addedDate);
-                cmd.Parameters.AddWithValue("@addedBy", user.addedBy);
-                cmd.Parameters.AddWithValue("@userId", user.userId);
+                // add value to parameters
+                cmd.Parameters.AddWithValue("@firstName", customer.firstName);
+                cmd.Parameters.AddWithValue("@lastName", customer.lastName);
+                cmd.Parameters.AddWithValue("@companyName", customer.companyName);
+                cmd.Parameters.AddWithValue("@customerType", customer.customerType);
+                cmd.Parameters.AddWithValue("@phone", customer.phone);
+                cmd.Parameters.AddWithValue("@ext", customer.ext);
+                cmd.Parameters.AddWithValue("@mobile", customer.mobile);
+                cmd.Parameters.AddWithValue("@street", customer.street);
+                cmd.Parameters.AddWithValue("@region", customer.region);
+                cmd.Parameters.AddWithValue("@city", customer.city);
+                cmd.Parameters.AddWithValue("@barangay", customer.barangay);
+                cmd.Parameters.AddWithValue("@zipCode", customer.zipCode);
+                cmd.Parameters.AddWithValue("@customerStatus", customer.status);
+                cmd.Parameters.AddWithValue("@addedDate", customer.addedDate);
+                cmd.Parameters.AddWithValue("@addedBy", customer.addedBy);
+                cmd.Parameters.AddWithValue("@customerId", customer.customerId);
 
+
+                //open database connection
                 conn.Open();
 
                 int rows = cmd.ExecuteNonQuery();
@@ -160,7 +171,7 @@ namespace SkyfreshInt.dataValidation
             finally
             {
                 conn.Close();
-                
+
             }
             return isSuccess;
         }
@@ -168,9 +179,9 @@ namespace SkyfreshInt.dataValidation
 
         #endregion
 
-        #region delete data in database
+        #region delete client in tblClients table
 
-        public bool delete (userGetSet user)
+        public bool delete(customerGetSet customer)
         {
             bool isSuccess = false;
 
@@ -179,12 +190,12 @@ namespace SkyfreshInt.dataValidation
 
             try
             {
-                string sql = "Delete from tblUsers where userId=@userID";
+                string sql = "Delete from tblClients where customerId=@customerID";
 
                 SqlCommand cmd = new SqlCommand(sql, conn);
 
-            
-                cmd.Parameters.AddWithValue("@userID", user.userId);
+
+                cmd.Parameters.AddWithValue("@customerID", customer.customerId);
 
                 conn.Open();
 
@@ -210,12 +221,12 @@ namespace SkyfreshInt.dataValidation
                 conn.Close();
 
             }
-            return isSuccess; 
+            return isSuccess;
         }
 
         #endregion
 
-        #region Search User in tblusers
+        #region Search customer name in customer records
 
         public DataTable search(string keywords)
         {
@@ -225,7 +236,7 @@ namespace SkyfreshInt.dataValidation
 
             try
             {
-                string sql = "Select * from tblUsers where userId Like '%"+keywords+ "%' or lastName like'%"+ keywords+ "%' or userName like '%" + keywords + "%'";
+                string sql = "Select * from tblClients where customerId Like '%" + keywords + "%'or companyName like'%" + keywords + "%'  or lastName like'%" + keywords + "%' or lastName like '%" + keywords + "%'";
                 //Select specifica  data in tblusers to search 
                 SqlCommand cmd = new SqlCommand(sql, conn); // create sql command using sql query
                 SqlDataAdapter adapter = new SqlDataAdapter(cmd); //this will all get the data from database using cmd
@@ -248,42 +259,7 @@ namespace SkyfreshInt.dataValidation
 
         #endregion
 
-        #region Getting userid from username; to display in addedBy
-
-        public userGetSet getUsernameId (string username)
-        {
-            userGetSet userInfo = new userGetSet ();
-
-            SqlConnection conn = new SqlConnection(myconnstring);
-            DataTable dt = new DataTable();
-
-            try
-            {
-
-                string sql = "Select userId from tblUsers where username='"+ username +"'";
-
-                SqlDataAdapter adapter = new SqlDataAdapter(sql, conn);
-                conn.Open();
-
-                adapter.Fill(dt);
-
-                if (dt.Rows.Count >= 0)
-                {
-                  userInfo.userId = int.Parse(dt.Rows[0]["userId"].ToString());
-                }
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message);
-            }
-            finally
-            {
-                conn.Close();
-            }
-            return userInfo;
-        }
-
-        #endregion
+       
 
     }
 }
